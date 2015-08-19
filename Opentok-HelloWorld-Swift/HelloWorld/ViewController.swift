@@ -16,12 +16,15 @@ let videoHeight : CGFloat = 240
 // Replace with your OpenTok API key
 let ApiKey = "45242822"
 // Replace with your generated session ID
-let SessionID = "2_MX40NTI0MjgyMn5-MTQzNzY0ODUzMzcwNn5wSUJ5UWFvMTBzMG1nK3dVSE1GdVBYcXR-UH4"
+//let SessionID = "2_MX40NTI0MjgyMn5-MTQzNzY0ODUzMzcwNn5wSUJ5UWFvMTBzMG1nK3dVSE1GdVBYcXR-UH4"
 // Replace with your generated token
-let Token = "T1==cGFydG5lcl9pZD00NTI0MjgyMiZzaWc9OGFiN2E0NGRjZDcxMmYwOThlNjBjNWUxZWQ5OGRkMDJhZjk1MzMxZDpzZXNzaW9uX2lkPTJfTVg0ME5USTBNamd5TW41LU1UUXpOelkwT0RVek16Y3dObjV3U1VKNVVXRnZNVEJ6TUcxbkszZFZTRTFHZFZCWWNYUi1VSDQmY3JlYXRlX3RpbWU9MTQzNzY1MTU4OSZub25jZT05MTcwNDc4NTQmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTQzNzczNzk4OQ=="
+//let Token = "T1==cGFydG5lcl9pZD00NTI0MjgyMiZzaWc9OGFiN2E0NGRjZDcxMmYwOThlNjBjNWUxZWQ5OGRkMDJhZjk1MzMxZDpzZXNzaW9uX2lkPTJfTVg0ME5USTBNamd5TW41LU1UUXpOelkwT0RVek16Y3dObjV3U1VKNVVXRnZNVEJ6TUcxbkszZFZTRTFHZFZCWWNYUi1VSDQmY3JlYXRlX3RpbWU9MTQzNzY1MTU4OSZub25jZT05MTcwNDc4NTQmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTQzNzczNzk4OQ=="
 
 // Change to YES to subscribe to your own stream.
 let SubscribeToSelf = false
+
+let ServerUrl = "http://88.80.175.129:4567/"
+let ServerRoomNamePath = "session/"
 
 class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate {
     
@@ -33,8 +36,6 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Step 1: As the view is loaded initialize a new instance of OTSession
-        session = OTSession(apiKey: ApiKey, sessionId: SessionID, delegate: self)
         panRecognizer.addTarget(self, action: Selector("handlePan:"))
         //panRecognizer.delaysTouchesEnded = false
         //self.view.addGestureRecognizer(panRecognizer)
@@ -43,23 +44,82 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     
     override func viewWillAppear(animated: Bool) {
         // Step 2: As the view comes into the foreground, begin the connection process.
-        doConnect()
+//        doConnect()
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-      
+    
+    override func viewDidAppear(animated: Bool) {
+        // First ask the user for a chat room name.
+        showEnterChatRoomNameDialog()
+        
+
+    }
+    
+    func showEnterChatRoomNameDialog() {
+        let dialogController: UIAlertController = UIAlertController(title: "Anslut till chatrum", message: "Ange namnet på det chatrum du vill ansluta dig till.", preferredStyle: .Alert)
+
+        dialogController.addTextFieldWithConfigurationHandler { textField -> Void in
+            //TextField configuration
+//            textField.textColor = UIColor.blueColor()
+//            textFieldInDialog = textField
+        }
+
+        let connectAction: UIAlertAction = UIAlertAction(title: "Anslut", style: .Default) { action -> Void in
+            let textField : UITextField = dialogController.textFields![0] as! UITextField
+            NSLog("Connect to chatroom \(textField.text)")
+
+            self.doConnectToChatRoom(textField.text)
+            
+        }
+        dialogController.addAction(connectAction)
+        self.presentViewController(dialogController, animated: true, completion: nil)
+        
+    }
+    
+    func doConnectToChatRoom(roomName: String) {
+        // First ask our server for the details to connect to that chat room.
+        let url = NSURL(string: ServerUrl + ServerRoomNamePath  + "/" + roomName)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
+            let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
+            
+            if (jsonResult != nil) {
+                let token = jsonResult["token"] as! String
+                let sessionId = jsonResult["sessionId"] as! String
+                NSLog("########## token=\(token)")
+                NSLog("########## sessionId=\(sessionId)")
+                self.doConnectOpenTok(sessionId, token: token)
+            } else {
+                // couldn't load JSON, look at error
+                self.showAlert("Error loading chat room data")
+            }
+
+//            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
+//            NSLog("Chat room details = \(dataString)")
+
+        }
+        
+        task.resume()
+        
+        
+    }
+    
     // MARK: - OpenTok Methods
 
     /**
      * Asynchronously begins the session connect process. Some time later, we will
      * expect a delegate method to call us back with the results of this action.
      */
-    func doConnect() {
+    func doConnectOpenTok(sessionId: String, token: String) {
+        session = OTSession(apiKey: ApiKey, sessionId: sessionId, delegate: self)
         if let session = self.session {
             var maybeError : OTError?
-            session.connectWithToken(Token, error: &maybeError)
+            session.connectWithToken(token, error: &maybeError)
             if let error = maybeError {
                 showAlert(error.localizedDescription)
             }

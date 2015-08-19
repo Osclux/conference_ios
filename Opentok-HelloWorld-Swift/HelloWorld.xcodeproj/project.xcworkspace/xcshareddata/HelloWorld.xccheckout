@@ -10,31 +10,31 @@
 	<string>HelloWorld</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CEE117A0E658AE5CF6B6D735C8597739491A03E3</key>
-		<string>https://github.com/thepatrick/Opentok-HelloWorld-Swift.git</string>
+		<key>476650701DE891C550B237D6B8E3190BD7EFA556</key>
+		<string>https://github.com/Osclux/conference_ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HelloWorld.xcodeproj</string>
+	<string>Opentok-HelloWorld-Swift/HelloWorld.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CEE117A0E658AE5CF6B6D735C8597739491A03E3</key>
-		<string>../..</string>
+		<key>476650701DE891C550B237D6B8E3190BD7EFA556</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/thepatrick/Opentok-HelloWorld-Swift.git</string>
+	<string>https://github.com/Osclux/conference_ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CEE117A0E658AE5CF6B6D735C8597739491A03E3</string>
+	<string>476650701DE891C550B237D6B8E3190BD7EFA556</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CEE117A0E658AE5CF6B6D735C8597739491A03E3</string>
+			<string>476650701DE891C550B237D6B8E3190BD7EFA556</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Opentok-HelloWorld-Swift</string>
+			<string>conference_ios</string>
 		</dict>
 	</array>
 </dict>
