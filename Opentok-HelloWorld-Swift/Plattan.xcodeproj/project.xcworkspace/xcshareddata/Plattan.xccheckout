@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>89D51116-50FC-4E75-BC1D-60FF254C8A96</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Plattan</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>476650701DE891C550B237D6B8E3190BD7EFA556</key>
+		<string>https://github.com/Osclux/conference_ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Opentok-HelloWorld-Swift/Plattan.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>476650701DE891C550B237D6B8E3190BD7EFA556</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Osclux/conference_ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>476650701DE891C550B237D6B8E3190BD7EFA556</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>476650701DE891C550B237D6B8E3190BD7EFA556</string>
+			<key>IDESourceControlWCCName</key>
+			<string>conference_ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
