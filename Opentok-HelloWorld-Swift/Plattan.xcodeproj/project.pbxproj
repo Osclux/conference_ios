@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55D1A31B1B85F3F000C07CC1 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D1A31A1B85F3F000C07CC1 /* Launch Screen.xib */; };
 		CD99C5E51B0C3A3F003D4FED /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD99C5E41B0C3A3F003D4FED /* GLKit.framework */; };
 		CD99C5E71B0C3A46003D4FED /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD99C5E61B0C3A46003D4FED /* VideoToolbox.framework */; };
 		CDC39155193E9E790006FFCB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDC39154193E9E790006FFCB /* libsqlite3.dylib */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55D1A3191B85BA9800C07CC1 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
+		55D1A31A1B85F3F000C07CC1 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		CD99C5E41B0C3A3F003D4FED /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CD99C5E61B0C3A46003D4FED /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		CDC39154193E9E790006FFCB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -163,6 +166,7 @@
 				CDC904D3193E3BAF00E878A8 /* Main.storyboard */,
 				CDC904D6193E3BAF00E878A8 /* Images.xcassets */,
 				CDC904CD193E3BAF00E878A8 /* Supporting Files */,
+				55D1A31A1B85F3F000C07CC1 /* Launch Screen.xib */,
 			);
 			path = HelloWorld;
 			sourceTree = "<group>";
@@ -276,6 +280,7 @@
 			files = (
 				CDC904D5193E3BAF00E878A8 /* Main.storyboard in Resources */,
 				CDC904D7193E3BAF00E878A8 /* Images.xcassets in Resources */,
+				55D1A31B1B85F3F000C07CC1 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +326,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CDC904D4193E3BAF00E878A8 /* Base */,
+				55D1A3191B85BA9800C07CC1 /* sv */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
