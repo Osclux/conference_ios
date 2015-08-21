@@ -28,6 +28,11 @@ let ServerRoomNamePath = "session/"
 
 class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelegate, OTPublisherDelegate {
     
+    @IBOutlet weak var otherVideoView: UIView!
+    @IBOutlet weak var selfVideoView: UIView!
+    @IBOutlet weak var exitCallButton: UIButton!
+    
+    
     var session : OTSession?
     var publisher : OTPublisher?
     var subscriber : OTSubscriber?
@@ -39,6 +44,7 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         panRecognizer.addTarget(self, action: Selector("handlePan:"))
         //panRecognizer.delaysTouchesEnded = false
         //self.view.addGestureRecognizer(panRecognizer)
+
         
     }
     
@@ -109,6 +115,28 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         
     }
     
+    
+    @IBAction func onExitCallButton(sender: AnyObject) {
+        NSLog("Exit Call");
+        if let s = session {
+            var maybeError : OTError?
+            s.disconnect(&maybeError)
+            if let error = maybeError {
+                showAlert(error.localizedDescription)
+            } else {
+                if let publisherView = publisher?.view {
+                    publisherView.removeFromSuperview()
+                }
+                if let subscriberView = subscriber?.view {
+                    subscriberView.removeFromSuperview()
+                    subscriber = nil
+                }
+            }
+            
+            showEnterChatRoomNameDialog()
+        }
+    }
+    
     // MARK: - OpenTok Methods
 
     /**
@@ -141,8 +169,8 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
             showAlert(error.localizedDescription)
         }
         
-        view.addSubview(publisher!.view)
-        publisher!.view.frame = CGRect(x: 0.0, y: 0, width: videoWidth, height: videoHeight)
+        selfVideoView.addSubview(publisher!.view)
+        publisher!.view.frame = CGRect(x: 0.0, y: 0, width: selfVideoView.frame.width, height: selfVideoView.frame.height)
     }
 
     /**
@@ -238,9 +266,10 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
             //view.userInteractionEnabled = false
             let videoDim = subscriberKit.stream.videoDimensions;
             NSLog("video dimensions w:\(videoDim.width) h:\(videoDim.height)")
-            view.frame =  CGRect(x: 0.0, y: videoHeight, width: videoWidth, height: videoHeight)
+            //view.frame =  CGRect(x: 0.0, y: videoHeight, width: videoWidth, height: videoHeight)
+            view.frame =  CGRect(x: 0.0, y: 0, width: otherVideoView.frame.width, height: otherVideoView.frame.height)
             view.addGestureRecognizer(panRecognizer)
-            self.view.addSubview(view)
+            self.otherVideoView.addSubview(view)
             
             
         }
