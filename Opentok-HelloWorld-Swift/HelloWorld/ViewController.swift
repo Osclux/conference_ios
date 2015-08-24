@@ -31,26 +31,22 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     @IBOutlet weak var otherVideoView: UIView!
     @IBOutlet weak var selfVideoView: UIView!
     @IBOutlet weak var exitCallButton: UIButton!
+    @IBOutlet weak var beanButton: UIButton!
     
     
     var session : OTSession?
     var publisher : OTPublisher?
     var subscriber : OTSubscriber?
     let panRecognizer = UIPanGestureRecognizer()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         panRecognizer.addTarget(self, action: Selector("handlePan:"))
-        //panRecognizer.delaysTouchesEnded = false
-        //self.view.addGestureRecognizer(panRecognizer)
-
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        // Step 2: As the view comes into the foreground, begin the connection process.
-//        doConnect()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -60,18 +56,12 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
     override func viewDidAppear(animated: Bool) {
         // First ask the user for a chat room name.
         showEnterChatRoomNameDialog()
-        
-
     }
     
     func showEnterChatRoomNameDialog() {
         let dialogController: UIAlertController = UIAlertController(title: "Anslut till chatrum", message: "Ange namnet på det chatrum du vill ansluta dig till.", preferredStyle: .Alert)
 
-        dialogController.addTextFieldWithConfigurationHandler { textField -> Void in
-            //TextField configuration
-//            textField.textColor = UIColor.blueColor()
-//            textFieldInDialog = textField
-        }
+        dialogController.addTextFieldWithConfigurationHandler(nil)
 
         let connectAction: UIAlertAction = UIAlertAction(title: "Anslut", style: .Default) { action -> Void in
             let textField : UITextField = dialogController.textFields![0] as! UITextField
@@ -91,6 +81,9 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
         
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            //            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            //            NSLog("Chat room details = \(dataString)")
+
             var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
             let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
             
@@ -105,8 +98,6 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
                 self.showAlert("Error loading chat room data")
             }
 
-//            let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-//            NSLog("Chat room details = \(dataString)")
 
         }
         
@@ -135,6 +126,31 @@ class ViewController: UIViewController, OTSessionDelegate, OTSubscriberKitDelega
             
             showEnterChatRoomNameDialog()
         }
+    }
+    
+    @IBAction func onBeanButton(sender: AnyObject) {
+        let settingsActionSheet: UIAlertController = UIAlertController(title:nil, message:nil, preferredStyle:UIAlertControllerStyle.ActionSheet)
+        settingsActionSheet.addAction(UIAlertAction(title:"Anslut till platta", style:UIAlertActionStyle.Default, handler:{ action in
+            self.doConnectToBean()
+        }))
+        settingsActionSheet.addAction(UIAlertAction(title:"Koppla bort platta", style:UIAlertActionStyle.Default, handler:{ action in
+            self.doDisconnectFromBean()
+        }))
+        settingsActionSheet.addAction(UIAlertAction(title:"Avbryt", style:UIAlertActionStyle.Cancel, handler:nil))
+        presentViewController(settingsActionSheet, animated:true, completion:nil)
+    }
+    
+    func doConnectToBean() {
+        NSLog("Connect to bean")
+        // Discover bean
+        
+        // Connect to the first bean discovered
+        
+        
+    }
+    
+    func doDisconnectFromBean() {
+        NSLog("Disconnect from bean")
     }
     
     // MARK: - OpenTok Methods

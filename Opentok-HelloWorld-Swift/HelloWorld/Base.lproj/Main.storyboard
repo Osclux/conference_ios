@@ -36,10 +36,20 @@
                                 <rect key="frame" x="0.0" y="145" width="600" height="417"/>
                                 <color key="backgroundColor" red="0.92730116979098531" green="1" blue="0.91443540124895728" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5z-yr-sUI">
+                                <rect key="frame" x="536" y="20" width="48" height="30"/>
+                                <state key="normal" title="Plattan">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBeanButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6ep-Ne-cd0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5oq-Gy-PY4" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="2Eq-22-0Qp"/>
+                            <constraint firstItem="E5z-yr-sUI" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="4Fm-Kx-sv2"/>
                             <constraint firstItem="TBN-pn-zmZ" firstAttribute="top" secondItem="5oq-Gy-PY4" secondAttribute="bottom" constant="5" id="6cz-UX-mnU"/>
                             <constraint firstItem="5oq-Gy-PY4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.2" id="BfD-8X-U3N"/>
                             <constraint firstItem="5oq-Gy-PY4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Mgd-o2-uxv"/>
@@ -48,10 +58,12 @@
                             <constraint firstAttribute="centerX" secondItem="pfX-K3-xqM" secondAttribute="centerX" id="b0h-34-7rf"/>
                             <constraint firstItem="TBN-pn-zmZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nKz-Kx-Vf3"/>
                             <constraint firstItem="5oq-Gy-PY4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oSd-Ld-CM4"/>
+                            <constraint firstItem="E5z-yr-sUI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oeb-v3-bym"/>
                             <constraint firstAttribute="trailing" secondItem="TBN-pn-zmZ" secondAttribute="trailing" id="t6w-mv-g0H"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="beanButton" destination="E5z-yr-sUI" id="A5v-xm-0bf"/>
                         <outlet property="exitCallButton" destination="pfX-K3-xqM" id="JhR-0o-4Y8"/>
                         <outlet property="otherVideoView" destination="TBN-pn-zmZ" id="JPh-vq-8rO"/>
                         <outlet property="selfVideoView" destination="5oq-Gy-PY4" id="m7I-CI-4On"/>
@@ -59,6 +71,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="874" y="605"/>
         </scene>
     </scenes>
 </document>
